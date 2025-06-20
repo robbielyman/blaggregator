@@ -100,6 +100,12 @@ already been seen by blaggregator. So, if you published more than 2 posts
 between consecutive (hourly) crawls by blaggregator, only the last two posts
 will be notified on Zulip.
 
+### My blog post appears on Zulip, but with no summary quote.
+
+The quote is pulled from [feedparser's](https://pypi.org/project/feedparser/) summary field,
+which in turn is populated with, e.g. RSS or Atom's "summary" or "description" fields.
+Make sure that your feed is generating content for those tags!
+
 ### My blog is multi-purpose and not wholly code/Recurse Center specific
 
 No problem! RCers usually enjoy reading non-technical posts by others. 

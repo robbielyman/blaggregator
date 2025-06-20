@@ -3,7 +3,6 @@ import json
 import logging
 import os
 import re
-import textwrap
 
 # 3rd-party library
 from django.conf import settings
@@ -18,8 +17,8 @@ ZULIP_KEY = os.environ.get("ZULIP_KEY")
 ZULIP_EMAIL = os.environ.get("ZULIP_EMAIL")
 MESSAGES_URL = "https://recurse.zulipchat.com/api/v1/messages"
 MEMBERS_URL = "https://recurse.zulipchat.com/api/v1/users"
-ANNOUNCE_MESSAGE = "{} has a new blog post: [{}]({})\n```quote\n{}\n```"
-PLACEHOLDER = "Consider adding a `summary` to your next blog post! It'll show up here."
+ANNOUNCE_MESSAGE = "{} has a new blog post: [{}]({})\n"
+QUOTE = "```quote\n{}\n```"
 log = logging.getLogger("blaggregator")
 
 
@@ -46,9 +45,10 @@ def announce_posts(posts, debug=True):
         subject = title if len(title) <= 60 else title[:57] + "..."
         path = reverse("view_post", kwargs={"slug": post.slug})
         url = "{}/{}".format(settings.ROOT_URL.rstrip("/"), path.lstrip("/"))
-        summary = post.content if post.content else PLACEHOLDER
-        summary = textwrap.shorten(summary, width = 200, placeholder = "...")
-        content = ANNOUNCE_MESSAGE.format(author, title, url, summary)
+        content = ANNOUNCE_MESSAGE.format(author, title, url)
+        if post.content
+            summary = post.content if len(post.content) <= 480 else post.content[:477] + "..."
+            content = content + QUOTE.format(summary)
         send_message_zulip(to, subject, content, type_="stream")
 
 

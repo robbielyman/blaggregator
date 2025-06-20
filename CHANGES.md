@@ -7,6 +7,9 @@ this project doesn't really have releases (or even versioning, until now), it
 is a project that effects Recursers in "real ways".  It would be nice to have a
 place to quickly see the latest changes that the project has undergone.
 
+## 2025-06
+
+- [#190] Add text from the blog post summary to the Zulip announcement, if present -- @robbielyman
 
 ## 2021-09
 
