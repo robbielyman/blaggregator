@@ -46,7 +46,7 @@ def announce_posts(posts, debug=True):
         path = reverse("view_post", kwargs={"slug": post.slug})
         url = "{}/{}".format(settings.ROOT_URL.rstrip("/"), path.lstrip("/"))
         content = ANNOUNCE_MESSAGE.format(author, title, url)
-        if post.content
+        if post.content:
             summary = post.content if len(post.content) <= 480 else post.content[:477] + "..."
             content = content + QUOTE.format(summary)
         send_message_zulip(to, subject, content, type_="stream")
